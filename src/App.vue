@@ -13,7 +13,6 @@ export default {
   data() {
     return {
       store,
-      movieList: [],
     };
   },
 
@@ -30,7 +29,7 @@ export default {
         params: paramsobj,
         headers: { ' Authorization': 'Bearer ' + this.store.api_key }
       }).then((resp) => {
-      this.movieList = resp.data.results;
+      this.store.movieList = resp.data.results;
         console.log(this.movieList);
      });
     }

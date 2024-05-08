@@ -14,8 +14,8 @@ export default {
 </script>
 
 <template>
-    <div>
-        <div class="col p-2" v-for="curFilm in store.movieList">
+    <div class="row">
+        <div class="col-2" v-for="curFilm in store.movieList">
             <AppFilmCard :filmObj="curFilm"/>
         </div>
     </div>
