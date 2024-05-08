@@ -25,16 +25,25 @@ export default {
       }).then((resp) => {
       this.store.movieList = resp.data.results;
         console.log(this.store.movieList);
-     });
-    }
+     })
+     axios.get("https://api.themoviedb.org/3/tv/changes?page=1", {
+       params: paramsobj,
+     }).then((resp) => {
+     this.store.tvSeriesList = resp.data.results;
+       console.log(this.store.tvSeriesList);
+    });
+    },
+    
     }
     };
 </script>
 
 <template>
-    <nav class="navbar bg-body-tertiary">
-        <div class="container-fluid">
-            <a class="navbar-brand">Navbar</a>
+    <nav class="navbar bg-body-tertiary p-0">
+        <div class="container-fluid bg-boolflix">
+            <a class="navbar-brand">
+                <img src="../assets/img/logo_boolflix.png" alt="">
+            </a>
             <form class="d-flex" role="search">
                <AppSearchBar @filter="getMovie"/>
             </form>
@@ -42,4 +51,9 @@ export default {
     </nav>
 </template>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.bg-boolflix {
+    background-color: #101010;
+}
+
+</style>

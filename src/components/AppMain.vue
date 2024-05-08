@@ -15,8 +15,16 @@ export default {
 
 <template>
     <div class="row">
+        <h1>Film</h1>
         <div class="col-2" v-for="curFilm in this.store.movieList">
             <AppFilmCard :filmObj="curFilm"/>
+        </div>
+    </div>
+
+    <div class="row">
+        <h1>Serie Tv</h1>
+        <div class="col-2" v-for="curSeries in this.store.tvSeriesList">
+            <AppFilmCard :filmObj="curSeries"/>
         </div>
     </div>
 </template>
