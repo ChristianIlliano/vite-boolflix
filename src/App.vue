@@ -13,18 +13,34 @@ export default {
   data() {
     return {
       store,
+      movieList: [],
     };
   },
 
+  created() {
+    this.getMovie()
+  },
   methods: {
-
+    getMovie() {
+      const paramsobj = {
+                api_key: this.store.api_Key,
+                query: this.store.userQuery,
+            }
+      axios.get("https://api.themoviedb.org/3/search/movie", {
+        params: paramsobj,
+        headers: { ' Authorization': 'Bearer ' + this.store.api_key }
+      }).then((resp) => {
+      this.movieList = resp.data.results;
+        console.log(this.movieList);
+     });
+    }
   }
 };
 
 </script>
 
 <template>
-  <AppHeader />
+  <AppHeader @filter="getMovie"/>
   <AppMain />
 </template>
 
