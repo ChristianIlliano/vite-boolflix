@@ -22,15 +22,14 @@ export default {
   methods: {
     getMovie() {
       const paramsobj = {
-                api_key: this.store.api_Key,
+                api_key: this.store.api_key,
                 query: this.store.userQuery,
             }
       axios.get("https://api.themoviedb.org/3/search/movie", {
         params: paramsobj,
-        headers: { ' Authorization': 'Bearer ' + this.store.api_key }
       }).then((resp) => {
       this.store.movieList = resp.data.results;
-        console.log(this.movieList);
+        console.log(this.store.movieList);
      });
     }
   }

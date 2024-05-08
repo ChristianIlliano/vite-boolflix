@@ -1,5 +1,7 @@
 <script>
+import axios from "axios";
 import { store } from "../store";
+import AppSearchBar from "./AppSearchBar.vue"
 export default {
 
     data() {
@@ -8,17 +10,23 @@ export default {
         }
     },
 
+    components: {
+        AppSearchBar,
+    },
+
     methods: {
-        search() {
-            axios.get("https://api.themoviedb.org/3/search/movie", {
-                params: {
-                    api_key: this.store.apiKey,
-                    query: this.store.searchQuery
-                }
-            }).then((resp) => {
-                this.store.moviesList = resp.data.results;
-            })
-        },
+        getMovie() {
+      const paramsobj = {
+                api_key: this.store.api_key,
+                query: this.store.userQuery,
+            }
+      axios.get("https://api.themoviedb.org/3/search/movie", {
+        params: paramsobj,
+      }).then((resp) => {
+      this.store.movieList = resp.data.results;
+        console.log(this.store.movieList);
+     });
+    }
     }
     };
 </script>
@@ -28,9 +36,7 @@ export default {
         <div class="container-fluid">
             <a class="navbar-brand">Navbar</a>
             <form class="d-flex" role="search">
-                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"
-                    v-model="store.userQuery">
-                <button class="btn btn-outline-success" type="submit" @click="$emit('filter')">Search</button>
+               <AppSearchBar @filter="getMovie"/>
             </form>
         </div>
     </nav>
