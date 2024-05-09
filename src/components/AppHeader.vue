@@ -26,7 +26,7 @@ export default {
       this.store.movieList = resp.data.results;
         console.log(this.store.movieList);
      })
-     axios.get("https://api.themoviedb.org/3/tv/changes?page=1", {
+     axios.get("https://api.themoviedb.org/3/search/tv", {
        params: paramsobj,
      }).then((resp) => {
      this.store.tvSeriesList = resp.data.results;

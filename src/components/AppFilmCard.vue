@@ -25,21 +25,40 @@ export default {
                     return "Bandiera non disponibile"   
             }
             return imgUrl
-        }
+        },
+
+        votation(vote){
+            vote = Math.floor(vote / 2) + 1
+            // ------------------------
+            if (vote < 0){
+                return 0
+            } else if (vote > 5)
+                return 5
+            else {
+                return vote
+            }
+        },
     }
 };
-</script>
+</script> 
 
 <template>
     <div>
-    <img :src="`https://image.tmdb.org/t/p/w342${filmObj.poster_path}`" alt="">
-    <h2>{{ filmObj.title }}</h2>
+    <img :src="`https://image.tmdb.org/t/p/w500${filmObj.poster_path}`" alt="">
+    <h4>{{ filmObj.title }}</h4>
     <p>{{ filmObj.original_title }}</p>
     <div class="icon-language">
         <img :src="showLanguage(filmObj.original_language)" alt=""
         v-if="showLanguage(filmObj.original_language) != 'Bandiera non disponibile'">
         <p v-else>{{showLanguage(filmObj.original_language)}}</p>
-        <p>{{ filmObj.original_language }}</p>
+        <div>
+        <span v-for="curStar in votation(filmObj.vote_average)">
+            <i class="fa-solid fa-star"></i>
+        </span>
+        <span v-for="curStar in (5 - votation(filmObj.vote_average))">
+            <i class="fa-regular fa-star"></i>
+        </span>
+        </div>
     </div>
     <p>{{ filmObj.vote_average }}</p>
     </div>
@@ -50,5 +69,5 @@ export default {
     img {
         max-width: 30px;
     }
-}
+};
 </style>
